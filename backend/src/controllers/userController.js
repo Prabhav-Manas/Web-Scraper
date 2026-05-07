@@ -54,3 +54,42 @@ exports.createUser=async(req,res,next)=>{
         })
     }
 }
+
+// Verify-Email
+exports.verifyEmail=async(req, res, next)=>{
+    try{
+        const {token}=req.params;
+
+        if(!token){
+            return res.status(400).json({
+                status:400,
+                message:"Verification token is missing!"
+            })
+        }
+
+        const user=await User.findOne({verificationToken:token, verificationTokenExpiry: { $gt: new Date() }});
+
+        if (!user) {
+            return res.status(400).json({
+                status:400,
+                message: 'Invalid or expired token.',
+            });
+        }
+
+        user.isVerified = true;
+        user.verificationToken = null;
+        user.verificationTokenExpiry = null;
+        await user.save();
+
+        return res.status(200).json({
+            status:200,
+            message:"Email verified successfully!"
+        })
+    }catch(error){
+        console.log("Verify Email Error:=>", error);
+        return res.status(500).json({
+            status:500,
+            message:"Internal Server Error!"
+        })
+    }
+}
