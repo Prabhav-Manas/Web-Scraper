@@ -20,6 +20,15 @@ const storyService = {
         const response = await axiosInstance.post('/api/scrape');
         return response.data;
     },
+
+    getBookmarkedStories: async () => {
+        // Fetch all stories — already has isBookmarked flag from backend
+        const response = await axiosInstance.get('/api/stories?limit=100');
+        
+        const all = response.data.stories;
+        // Filter only bookmarked ones
+        return all.filter((story) => story.isBookmarked === true);
+    }
 };
 
 export default storyService;

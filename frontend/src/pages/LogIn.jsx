@@ -52,7 +52,7 @@ const Login = () => {
             reset();
 
             setTimeout(() => {
-                navigate('/home');
+                navigate('/');
             }, 1500);
 
         } catch (error) {

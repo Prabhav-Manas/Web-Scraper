@@ -1,5 +1,11 @@
 const formatTime = (dateString) => {
+    if (!dateString) return 'unknown time';
+
     const date = new Date(dateString);
+
+    // ✅ Guard against Invalid Date
+    if (isNaN(date.getTime())) return 'unknown time';
+
     const now = new Date();
     const diffMs = now - date;
     const diffMins = Math.floor(diffMs / 60000);

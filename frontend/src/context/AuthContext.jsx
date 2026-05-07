@@ -25,10 +25,14 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
+        // Clear state
         setUser(null);
         setToken(null);
+        // Clear localStorage explicitly
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        // Clear everything else just in case
+        localStorage.clear();
     };
 
     return (

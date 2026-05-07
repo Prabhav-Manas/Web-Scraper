@@ -32,7 +32,16 @@ const scrapeHackerNews = async () => {
             const points = pointsText ? parseInt(pointsText.replace(' points', '').replace(' point', '')) : 0;
 
             const author = subtextRow.find('.hnuser').text().trim() || 'unknown';
-            const postedAt = subtextRow.find('.age').attr('title') || subtextRow.find('.age').text().trim() || null;
+
+            const ageEl = subtextRow.find('.age');
+
+            // Only use attr('title') — ignore text content completely
+            const rawTime = ageEl.attr('title') || ageEl.find('a').attr('title') || null;
+
+            // Clean the rawTime — remove anything after a space just in case
+            const cleanTime = rawTime ? rawTime.split(' ')[0] : null;
+
+            const postedAt = cleanTime ? `${cleanTime}Z` : null;
 
             if (title) {
                 stories.push({ title, url, points, author, postedAt });

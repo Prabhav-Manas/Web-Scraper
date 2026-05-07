@@ -21,13 +21,13 @@ exports.getAllStories=async(req, res, next)=>{
                 const jwt = require('jsonwebtoken');
                 const token = req.headers.authorization.split(' ')[1];
                 const decoded = jwt.verify(token, process.env.JWT_SECRET);
-                const user = await User.findById(decoded.id).select('bookmarks');
+                const userId = decoded.id || decoded.user?.id;
+                const user = await User.findById(userId).select('bookmarks');
                 if (user) {
                     bookmarkedIds = user.bookmarks.map((id) => id.toString());
                 }
             } catch (error) {
                 console.log('Error:=>', error);
-                // Invalid token — treat as unauthenticated
             }
         }
 
