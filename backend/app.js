@@ -3,6 +3,8 @@ const bodyParser=require('body-parser');
 const cors=require('cors');
 const mongoose=require('mongoose');
 
+const userRoutes=require("./src/routes/userRoutes");
+
 const app=express();
 
 const corsOptions={
@@ -28,5 +30,7 @@ mongoose.connect(process.env.MONGODB_URL).then(()=>{
 }).catch((error)=>{
     console.log('Faild to connect to DB!');
 })
+
+app.use("/api/auth", userRoutes);
 
 module.exports=app;
