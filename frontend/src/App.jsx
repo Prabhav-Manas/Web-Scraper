@@ -9,7 +9,7 @@ function App() {
     <div className="container">
       <div className="row">
         <Routes>
-          <Route path="/" element={<Navigate to="/register"/>}/>
+          <Route path="/" element={<Navigate to="/login"/>}/>
           <Route path="/login" element={<LogIn />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
