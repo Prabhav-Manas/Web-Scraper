@@ -1,7 +1,8 @@
 import './App.css'
 import Register from "./pages/Register"
 import LogIn from "./pages/LogIn"
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
+import Home from "./pages/Home"
+import { Routes, Route, Navigate } from "react-router-dom"
 
 function App() {
   return(
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<Navigate to="/register"/>}/>
           <Route path="/login" element={<LogIn />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </div>
     </div>
