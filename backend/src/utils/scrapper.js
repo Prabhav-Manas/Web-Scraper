@@ -46,7 +46,7 @@ const scrapeHackerNews = async () => {
         console.log(`Scraper done. ${stories.length} stories saved.`);
         return stories;
     } catch (error) {
-        console.log('Scraper Error:', error.message);
+        console.log('Scraper Error:=>', error.message);
         throw error;
     }
 };
