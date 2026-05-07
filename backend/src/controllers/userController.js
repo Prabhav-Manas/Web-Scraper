@@ -40,7 +40,7 @@ exports.createUser=async(req,res,next)=>{
 
         // Send Email Verification Link
         const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
-        await sendVerificationEmail(email, username, verificationLink);
+        await sendVerificationEmail(email, userName, verificationLink);
 
         return res.status(201).json({
             status:201,
@@ -58,7 +58,7 @@ exports.createUser=async(req,res,next)=>{
 // Verify-Email
 exports.verifyEmail=async(req, res, next)=>{
     try{
-        const {token}=req.params;
+        const {token}=req.query;
 
         if(!token){
             return res.status(400).json({
@@ -115,7 +115,7 @@ exports.signin=async(req, res, next)=>{
             })
         }
 
-        const isPasswordMatch=await user.comparePassword(password);
+        const isPasswordMatch=await bcrypt.compare(password, user.password);
 
         if(!isPasswordMatch){
             return res.status(401).json({
