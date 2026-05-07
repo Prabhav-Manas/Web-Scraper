@@ -2,6 +2,7 @@ const Story=require('../models/story');
 const User=require('../models/users');
 const scrapeHackerNews=require("../utils/scrapper");
 
+// All Stories
 exports.getAllStories=async(req, res, next)=>{
     try{
         const page = parseInt(req.query.page) || 1;
@@ -53,3 +54,28 @@ exports.getAllStories=async(req, res, next)=>{
         });
     }
 }
+
+// Fetch Single Story by id
+exports.getStoryById = async (req, res) => {
+    try {
+        const story = await Story.findById(req.params.id);
+
+        if (!story) {
+            return res.status(404).json({
+                status: 404,
+                message: 'Story not found!',
+            });
+        }
+
+        return res.status(200).json({
+            status: 200,
+            story,
+        });
+    } catch (error) {
+        console.log('Get Story By ID Error:=>', error);
+        return res.status(500).json({
+            status: 500,
+            message: 'Internal Server Error!',
+        });
+    }
+};
