@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const Story = require('../models/Story');
+const Story = require('../models/story');
 
 const scrapeHackerNews = async () => {
     try {
@@ -12,7 +12,7 @@ const scrapeHackerNews = async () => {
             }
         });
 
-        console.log('Scrapper data:=>', data)
+        // console.log('Scrapper data:=>', data)
 
         const $ = cheerio.load(data);
         const stories = [];

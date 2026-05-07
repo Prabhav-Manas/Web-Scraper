@@ -1,6 +1,6 @@
 const Story=require('../models/story');
 const User=require('../models/users');
-const scrapeHackerNews=require("../utils/scrapper");
+const {scrapeHackerNews}=require("../utils/scrapper");
 
 // All Stories
 exports.getAllStories=async(req, res, next)=>{

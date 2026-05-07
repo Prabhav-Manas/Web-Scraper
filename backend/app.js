@@ -4,6 +4,8 @@ const cors=require('cors');
 const mongoose=require('mongoose');
 
 const userRoutes=require("./src/routes/userRoutes");
+const storyRoutes=require("./src/routes/storyRoutes");
+const scrapeRoutes=require("./src/routes/scrapeRoutes");
 
 const app=express();
 
@@ -32,5 +34,7 @@ mongoose.connect(process.env.MONGODB_URL).then(()=>{
 })
 
 app.use("/api/auth", userRoutes);
+app.use('/api/stories', storyRoutes);
+app.use('/api/scrape', scrapeRoutes);
 
 module.exports=app;

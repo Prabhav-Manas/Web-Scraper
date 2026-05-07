@@ -100,7 +100,7 @@ exports.signin=async(req, res, next)=>{
         const {email, password}=req.body;
 
         if(!email || !password){
-            return res.status(400).josn({
+            return res.status(400).json({
                 status:400,
                 message:"Please provide email and password."
             })
