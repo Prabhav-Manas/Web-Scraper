@@ -93,3 +93,67 @@ exports.verifyEmail=async(req, res, next)=>{
         })
     }
 }
+
+// Signin
+exports.signin=async(req, res, next)=>{
+    try{
+        const {email, password}=req.body;
+
+        if(!email || !password){
+            return res.status(400).josn({
+                status:400,
+                message:"Please provide email and password."
+            })
+        }
+
+        const user=await User.findOne({email});
+
+        if(!user){
+            return res.status(401).json({
+                status:401,
+                message:"Invalid Email!"
+            })
+        }
+
+        const isPasswordMatch=await user.comparePassword(password);
+
+        if(!isPasswordMatch){
+            return res.status(401).json({
+                status:401,
+                message:"Invalid Credentials!"
+            })
+        }
+
+        if(!user.isVerified){
+            return res.status(403).json({
+                status:403,
+                message:"Please verify your email before logging in."
+            })
+        }
+
+        const payload={
+            user:{
+                id:user._id,
+                email:user.email
+            }
+        }
+
+        const accessToken=jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
+
+        return res.status(200).json({
+            status:200,
+            message:"Sign in Successful!",
+            user: {
+                id: user._id,
+                username: user.userName,
+                email: user.email,
+            },
+        })
+    }catch(error){
+        console.log("Sign in Error:=>", error);
+        return res.status(500).json({
+            status:500,
+            message:"Internal Server Error!"
+        })
+    }
+}
