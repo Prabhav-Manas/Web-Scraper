@@ -121,7 +121,7 @@ PORT=8000
 MONGODB_URL=your_mongodb_connection_string
 
 JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=7d
+JWT_EXPIRES_IN=1h
 
 FRONTEND_URL=http://localhost:5173
 
@@ -306,7 +306,6 @@ POST /api/scrape
 - Email Verification
 - Protected Routes
 - Bookmark Persistence
-- Auto Scraper on Server Start
 
 ---
 
@@ -334,22 +333,9 @@ Backend:
 Add deployed backend URL here
 ```
 
----
-
-# Future Improvements
-
-- Search & Filters
-- Infinite Scrolling
-- Dark Mode
-- Role-based Access
-- Story Categories
-- Unit & Integration Testing
-
----
-
 # Author
 
-Prabhav
+Prabhav Manas
 
 ---
 
