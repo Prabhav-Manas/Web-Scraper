@@ -1,13 +1,17 @@
 import './App.css'
-import Register from "./pages/Register"
-import LogIn from "./pages/LogIn"
-import VerifyEmail from "./pages/VerifyEmail"
-import Home from "./pages/Home"
-import Bookmarks from "./pages/Bookmarks"
+import { lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from "react-router-dom"
 import ProtectedRoute from "./components/common/ProtectedRoute"
 import PublicRoute from "./components/common/PublicRoute"
 import Navbar from "./components/common/Navbar"
+import Loader from "./components/common/Loader"
+
+// Lazy load all pages
+const Register = lazy(() => import('./pages/Register'));
+const LogIn = lazy(() => import('./pages/LogIn'));
+const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
+const Home = lazy(() => import('./pages/Home'));
+const Bookmarks = lazy(() => import('./pages/Bookmarks'));
 
 function App() {
     const location = useLocation();
@@ -20,18 +24,21 @@ function App() {
             {showNavbar && <Navbar />}
             <div className="container">
                 <div className="row">
-                    <Routes>
-                        {/* Public routes — redirect to home if already logged in */}
-                        <Route path="/login" element={<PublicRoute><LogIn /></PublicRoute>}/>
-                        <Route path="/register" element={<PublicRoute><Register /></PublicRoute>}/>
+                    {/* Suspense shows Loader while page is loading */}
+                    <Suspense fallback={<Loader message="Loading..." />}>
+                        <Routes>
+                            {/* Public routes */}
+                            <Route path="/login" element={<PublicRoute><LogIn /></PublicRoute>}/>
+                            <Route path="/register" element={<PublicRoute><Register /></PublicRoute>}/>
 
-                        {/* Open routes — accessible by anyone */}
-                        <Route path="/" element={<Home />} />
-                        <Route path="/verify-email" element={<VerifyEmail />} />
+                            {/* Open routes for everyone */}
+                            <Route path="/" element={<Home />} />
+                            <Route path="/verify-email" element={<VerifyEmail />} />
 
-                        {/* Protected routes — redirect to login if not logged in */}
-                        <Route path="/bookmarks" element={<ProtectedRoute><Bookmarks /></ProtectedRoute>}/>
-                    </Routes>
+                            {/* Protected routes */}
+                            <Route path="/bookmarks" element={<ProtectedRoute><Bookmarks /></ProtectedRoute>}/>
+                        </Routes>
+                    </Suspense>
                 </div>
             </div>
         </div>

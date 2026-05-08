@@ -25,7 +25,6 @@ const Home = () => {
             />
 
             {/* Pagination */}
-            {totalPages > 1 && (
                 <div className="d-flex justify-content-center mt-4 gap-2">
                     <button
                         className="btn btn-outline-secondary btn-sm"
@@ -47,7 +46,6 @@ const Home = () => {
                         Next →
                     </button>
                 </div>
-            )}
         </div>
     );
 };

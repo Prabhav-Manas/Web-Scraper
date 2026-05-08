@@ -16,7 +16,7 @@ const useStories = (page = 1, limit = 10) => {
 
                 setStories(data.stories);
                 
-                setTotalPages(data.totalPages || 1);
+                setTotalPages(data.pagination?.totalPages || 1);
             } catch (error) {
                 setError(error.response?.data?.message || 'Failed to fetch stories.');
             } finally {
