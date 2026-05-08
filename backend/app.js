@@ -41,4 +41,4 @@ app.use("/api/auth", userRoutes);
 app.use('/api/stories', storyRoutes);
 app.use('/api/scrape', scrapeRoutes);
 
-module.exports=app;
+module.exports={app, connectDB };
