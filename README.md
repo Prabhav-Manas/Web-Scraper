@@ -324,13 +324,13 @@ Add your Loom video link here
 Frontend:
 
 ```bash
-Add deployed frontend URL here
+https://stirring-malabi-0ccc9d.netlify.app/
 ```
 
 Backend:
 
 ```bash
-Add deployed backend URL here
+https://web-scraper-a2qq.onrender.com
 ```
 
 # Author
