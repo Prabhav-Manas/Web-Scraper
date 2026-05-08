@@ -27,11 +27,15 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-mongoose.connect(process.env.MONGODB_URL).then(()=>{
-    console.log('Connected to DB!');
-}).catch((error)=>{
-    console.log('Faild to connect to DB!');
-})
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URL);
+        console.log('Connected to DB!');
+    } catch (error) {
+        console.log('Failed to connect to DB:=>', error.message);
+        process.exit(1);  // stop server if DB connection fails
+    }
+};
 
 app.use("/api/auth", userRoutes);
 app.use('/api/stories', storyRoutes);
