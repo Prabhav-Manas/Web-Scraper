@@ -314,7 +314,11 @@ POST /api/scrape
 Loom walkthrough link:
 
 ```bash
-Add your Loom video link here
+**Follow in sequence:**
+1. https://www.loom.com/share/79f9ff67c8a4421a813562c971bf4e74
+2. https://www.loom.com/share/fda1096951ed4aaebf15345b364da95e
+3. https://www.loom.com/share/b791d5270c0143318f5f0b9ab572ef39
+4. https://www.loom.com/share/18d0af5e613a411cb9af6e1e8d274de3
 ```
 
 ---
